@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en" >
+<head>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+
+<title>WeChat - Login</title>
+
+<!-- Custom fonts for this template-->
+<link href="./resources/css/all.min.css" rel="stylesheet"
+	type="text/css">
+
+<!-- Custom styles for this template-->
+<link href="./resources/css/sb-admin.css" rel="stylesheet">
+
+
+
+
+
+</head>
+
+<body class="bg-dark">
+
+	<div class="container">
+		<div class="card card-login mx-auto mt-5">
+			<div class="card-header">Login</div>
+			<div class="card-body">
+				<form action="login" method="post">
+					<div class="form-group">
+						<div class="form-label-group">
+							<input type="text" id="userName" name="userName"
+								class="form-control" placeholder="UserName" required="required"
+								autofocus="autofocus"> <label for="userName">userName</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="form-label-group">
+							<input type="password" id="userPassword" name="userPassword"
+								class="form-control" placeholder="user_Password"
+								required="required"> <label for="userPassword">userPassword</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="form-label-group">
+							<input type="text" id="verificationCode" name="verificationCode"
+								class="form-control" placeholder="请输入以下图片中的验证码"
+								required="required" autofocus="autofocus"> <label
+								for="verificationCode">请输入以下图片中的验证码</label><br /> 
+								<img id="codeImg" alt="点击更换" src="./Kaptcha" onclick="changeImg()" /><span>&nbsp;&nbsp;看不清楚?点击图片刷新验证码</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="checkbox">
+							<label> <input type="checkbox" value="remember-me">
+								Remember Password
+							</label>
+							<div id="msg" style="color: red"></div>
+						</div>
+					</div>
+					<div class="text-center">
+						<input type="submit" style="width: 50%" value="login">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bootstrap core JavaScript-->
+	<script src="./resources/jquery/jquery-3.4.1.min.js"></script>
+	<script src="./resources/bootstrap/bootstrap.bundle.min.js"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script src="./resources/jquery/jquery.easing.min.js"></script>
+	<script src="./resources/js/common.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			var msg =  [[${msg}]]+"";
+			
+				$('#msg').html(msg);
+			
+		})
+	</script>
+</body>
+
+</html>

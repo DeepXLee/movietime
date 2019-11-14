@@ -1,0 +1,16 @@
+2019-08-15 14:58:47.214 [main] DEBUG com.max.dao.MovieDao.addMovie - ==>  Preparing: INSERT INTO movie_info(film_name,upload_time,size,file_type,hot_word,play_times,download_times) VALUES(?,?,?,?,?,?,?) 
+2019-08-15 14:58:47.245 [main] DEBUG com.max.dao.MovieDao.addMovie - ==> Parameters: 新文3.txt(String), 2019-08-15 14:58:46.96(Timestamp), 1000(Long), txt(String), null, 0(Integer), 0(Integer)
+2019-08-15 14:58:47.274 [main] DEBUG com.max.dao.MovieDao.addMovie - <==    Updates: 1
+2019-08-15 16:41:52.508 [main] DEBUG com.max.dao.MovieDao.updateMovie - ==>  Preparing: UPDATE movie_info SET hot_word=?, play_times=?, download_times=? WHERE film_name=? 
+2019-08-15 16:41:52.533 [main] DEBUG com.max.dao.MovieDao.updateMovie - ==> Parameters: 欧美(String), 20(Integer), 5(Integer), 黑衣人4.mp4(String)
+2019-08-15 16:41:52.550 [main] DEBUG com.max.dao.MovieDao.updateMovie - <==    Updates: 1
+2019-08-15 17:07:12.831 [main] DEBUG com.max.dao.MovieDao.queryMovieByName - ==>  Preparing: SELECT * from movie_info where film_name=? 
+2019-08-15 17:07:12.855 [main] DEBUG com.max.dao.MovieDao.queryMovieByName - ==> Parameters: 黑衣人4.mp4(String)
+2019-08-15 17:08:52.846 [main] DEBUG com.max.dao.MovieDao.queryMovieByName - ==>  Preparing: SELECT * from movie_info where film_name=? 
+2019-08-15 17:08:52.880 [main] DEBUG com.max.dao.MovieDao.queryMovieByName - ==> Parameters: 黑衣人4.mp4(String)
+2019-08-15 17:09:54.089 [main] DEBUG com.max.dao.MovieDao.queryMovieByName - ==>  Preparing: SELECT * from movie_info where film_name=? 
+2019-08-15 17:09:54.121 [main] DEBUG com.max.dao.MovieDao.queryMovieByName - ==> Parameters: 黑衣人4.mp4(String)
+2019-08-15 17:09:54.141 [main] DEBUG com.max.dao.MovieDao.queryMovieByName - <==      Total: 1
+2019-08-15 17:23:50.275 [main] DEBUG com.max.dao.MovieDao.queryMovieByName - ==>  Preparing: SELECT * from movie_info where film_name=? 
+2019-08-15 17:23:50.305 [main] DEBUG com.max.dao.MovieDao.queryMovieByName - ==> Parameters: 黑衣人4.mp4(String)
+2019-08-15 17:23:50.327 [main] DEBUG com.max.dao.MovieDao.queryMovieByName - <==      Total: 1

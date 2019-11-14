@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+            http://www.springframework.org/schema/beans/spring-beans.xsd 
+            http://www.springframework.org/schema/mvc 
+            http://www.springframework.org/schema/mvc/spring-mvc.xsd 
+            http://www.springframework.org/schema/context 
+            http://www.springframework.org/schema/context/spring-context.xsd 
+            http://www.springframework.org/schema/aop 
+            http://www.springframework.org/schema/aop/spring-aop.xsd 
+            http://www.springframework.org/schema/tx 
+            http://www.springframework.org/schema/tx/spring-tx.xsd 
+            http://www.springframework.org/schema/jdbc
+            http://www.springframework.org/schema/jdbc/spring-jdbc.xsd ">
+
+	<!-- 引入属性文件 jdbc.properites -->
+	<context:property-placeholder
+		location="classpath:jdbc.properties" />
+
+	<!--2 配置C3P0数据源 -->
+	<bean id="dataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="${jdbc.driverClassName}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="acquireIncrement" value="5"></property>
+		<property name="initialPoolSize" value="10"></property>
+		<property name="minPoolSize" value="5"></property>
+		<property name="maxPoolSize" value="20"></property>
+	</bean>
+
+	<!-- 初始化数据表结构 -->
+	<jdbc:initialize-database
+		data-source="dataSource" ignore-failures="ALL">
+		<jdbc:script location="classpath:db.sql" />
+		<jdbc:script location="classpath:importData.sql" />
+	</jdbc:initialize-database>
+
+	<!-- sessionFactory 将spring和mybatis整合 -->
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 实例化sqlSessionFactory时需要使用上述配置好的数据源以及SQL映射文件 -->
+		<!-- 数据源 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 配置MyBaties全局配置文件:mybatis-config.xml -->
+		<property name="configLocation"
+			value="classpath:mybatis-config.xml" />
+		<!-- 扫描entity包,使用别名 -->
+		<property name="typeAliasesPackage" value="com.max.entity" />
+		<!-- sql映射文件路径 -->
+		<!-- 自动扫描com/mapper/目录下的所有SQL映射的xml文件, 省掉Configuration.xml里的手工配置 value="classpath:com/mapper/*.xml"指的是classpath(类路径)下com.mapper包中的所有xml文件 -->
+		<property name="mapperLocations"
+			value="classpath:mapper/*.xml" />
+	</bean>
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="sqlSessionFactoryBeanName"
+			value="sqlSessionFactory" />
+		<property name="basePackage" value="com.max.dao" />
+	</bean>
+
+
+
+
+
+</beans>

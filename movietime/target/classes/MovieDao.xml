@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.max.dao.MovieDao">
+
+<select id="queryMovie" resultType="com.max.entity.MovieInfo">
+	SELECT * FROM	movie_info
+	<where>
+		<if test="filmName != null" >and film_name like '%${filmName}%'</if>
+	</where>
+	<if test="sort ==null">ORDER BY upload_time DESC</if>
+	<if test="sort != null">ORDER BY ${sort} ${order}</if> 
+	LIMIT #{offset},#{limit};
+</select>
+
+<select id="queryMovieCount" resultType="int">
+	SELECT count(1) FROM movie_info
+	<where>
+		<if test="filmName != null" >and film_name like '%${filmName}%'</if>
+	</where>
+</select>
+
+<insert id="addMovie" parameterType="com.max.entity.MovieInfo" useGeneratedKeys="true" keyProperty="filmName" keyColumn="film_name">
+	INSERT INTO
+	movie_info(film_name,upload_time,size,file_type,hot_word,play_times,download_times)
+	VALUES(#{filmName},#{uploadTime},#{size},#{fileType},#{hotWord},#{playTimes},#{downloadTimes})
+</insert>
+
+<delete id="deleteMovie" parameterType="String">
+	DELETE from movie_info WHERE film_name=#{filmName}
+</delete>
+
+<update id="updateMovie" parameterType="com.max.entity.MovieInfo" useGeneratedKeys="true" keyProperty="filmName" keyColumn="film_name">
+	UPDATE movie_info 
+	<set>
+		<if test="fileType != null">file_type=#{fileType},</if>
+		<if test="size != null">size=#{size},</if>
+		<if test="uploadTime !=null">upload_time=#{uploadTime},</if>
+		<if test="hotWord !=null">hot_word=#{hotWord},</if>
+		<if test="playTimes !=null">play_times=#{playTimes},</if>
+		<if test="downloadTimes !=null">download_times=#{downloadTimes},</if>
+	</set>
+	WHERE film_name=#{filmName}
+</update>
+
+<select id="queryMovieByName" parameterType="String"  resultType="com.max.entity.MovieInfo">
+	SELECT * from movie_info where film_name=#{filmName}
+</select>
+
+</mapper>
